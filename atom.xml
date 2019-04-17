@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-17T14:59:44.955Z</updated>
+  <updated>2019-04-17T15:12:29.100Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,16 +17,28 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test_my_site</title>
-    <link href="http://yoursite.com/2019/04/17/test-my-site/"/>
-    <id>http://yoursite.com/2019/04/17/test-my-site/</id>
+    <title>进程与线程概述</title>
+    <link href="http://yoursite.com/2019/04/17/Process-and-thread/"/>
+    <id>http://yoursite.com/2019/04/17/Process-and-thread/</id>
     <published>2019-04-17T14:59:44.000Z</published>
-    <updated>2019-04-17T14:59:44.955Z</updated>
+    <updated>2019-04-17T15:12:29.100Z</updated>
+    
+    <content type="html"><![CDATA[<p>进程与线程是现代操作系统中非常重要的两个概念，其主要区别是，所有进程有自己的独立访问空间，而所有线程则共用同一地址空间。</p>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;p&gt;进程与线程是现代操作系统中非常重要的两个概念，其主要区别是，所有进程有自己的独立访问空间，而所有线程则共用同一地址空间。&lt;/p&gt;
+
+      
+    
     </summary>
     
+      <category term="操作系统" scheme="http://yoursite.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="操作系统, 进程, 线程" scheme="http://yoursite.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
