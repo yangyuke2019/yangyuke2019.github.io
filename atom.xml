@@ -51,9 +51,9 @@
     <link href="http://yoursite.com/2019/04/17/Process-and-thread/"/>
     <id>http://yoursite.com/2019/04/17/Process-and-thread/</id>
     <published>2019-04-17T14:59:44.000Z</published>
-    <updated>2019-05-01T15:20:05.829Z</updated>
+    <updated>2019-05-01T15:23:07.343Z</updated>
     
-    <content type="html"><![CDATA[<p>进程与线程是现代操作系统中非常重要的两个概念，其主要区别是，所有进程有自己的独立访问空间，而所有线程则共用同一地址空间。<br><img src="https://github.com/yangyuke2019/yangyuke2019.github.io/blob/master/PostImg/RLC_Reordering_Window.PNG" alt="image" title="图1  RLC窗口不同大小收发状态"></p>]]></content>
+    <content type="html"><![CDATA[<p>进程与线程是现代操作系统中非常重要的两个概念，其主要区别是，所有进程有自己的独立访问空间，而所有线程则共用同一地址空间。<br><img src="https://github.com/yangyuke2019/yangyuke2019.github.io/blob/master/PostImg/RLC_Reordering_Window.PNG" alt="image"></p>]]></content>
     
     <summary type="html">
     
