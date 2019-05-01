@@ -89,12 +89,12 @@
 <meta property="og:site_name" content="Yuke&#39;s blog">
 <meta property="og:description" content="在LTE协议栈的PDCP层和RLC层，都有一个重排序窗口（reordering window），主要用来保证数据的可靠传输，PDCP层的重排序窗口主要用于handover时保证数据的可靠传输，这里暂且不表，只讨论RLC层的重排序窗口。 对RLC层，在AM接收模式和UM接收模式下，UM接收实体/AM实体接收端有一个重排序窗口，当接收到的RLC  PDU位于重排序窗口内，且之前没有被接收过时，接收端才">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/yangyuke2019/yangyuke2019.github.io/blob/master/PostImg/RLC_Reordering_Window.PNG">
-<meta property="og:updated_time" content="2019-05-01T13:11:12.543Z">
+<meta property="og:image" content="https://github.com/yangyuke2019/yangyuke2019.github.io/blob/master/PostImg/RLC_Reordering_Window.PNG <font face=" consolas">"图1  RLC窗口不同大小收发状态"
+<meta property="og:updated_time" content="2019-05-01T13:56:55.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对RLC重排序窗口大小的一点讨论">
 <meta name="twitter:description" content="在LTE协议栈的PDCP层和RLC层，都有一个重排序窗口（reordering window），主要用来保证数据的可靠传输，PDCP层的重排序窗口主要用于handover时保证数据的可靠传输，这里暂且不表，只讨论RLC层的重排序窗口。 对RLC层，在AM接收模式和UM接收模式下，UM接收实体/AM实体接收端有一个重排序窗口，当接收到的RLC  PDU位于重排序窗口内，且之前没有被接收过时，接收端才">
-<meta name="twitter:image" content="https://github.com/yangyuke2019/yangyuke2019.github.io/blob/master/PostImg/RLC_Reordering_Window.PNG">
+<meta name="twitter:image" content="https://github.com/yangyuke2019/yangyuke2019.github.io/blob/master/PostImg/RLC_Reordering_Window.PNG <font face=" consolas">"图1  RLC窗口不同大小收发状态"
 
 
 
@@ -393,7 +393,8 @@
 <p>刚开始的时候，我一直不太明白，为什么重排序窗口要选择这么一个数？不能取大点或者取小点吗？我想了一下，没想明白，就囫囵吞枣地默认了这个事实，直到有一天，我在Andrew S. Tanenbaum写的<strong><a href="https://www.amazon.com/Computer-Networks-Andrew-S-Tanenbaum-ebook/dp/B006Y1BKGC" target="_blank" rel="noopener">Computer Networks</a></strong>一书中才偶然发现了答案。As an aside，这里推荐一下Tanenbaum写的另外一本书——<a href="https://www.amazon.com/Modern-Operating-Systems-Andrew-Tanenbaum/dp/013359162X" target="_blank" rel="noopener"><strong>Modern operating systems</strong></a>，这本书对现代操作系统里面基本的元素和概念都进行了比较详细的阐述，虽然有些地方略有晦涩，并且似乎有点far-fetched之嫌，但是不深究里面的code snippet，仅从其对操作系统一些思想的论述来理解操作系统的设计的话，仍然大有裨益。</p>
 <p>回到前面的讨论，在AM模式下，RLC PDU不一定要按序接收，假如收到的RLC PDU不是期望接收到的下一帧RLC PDU（i.e. 其SN不等于VR(R)变量的值），但是却位于重排序窗口内，那么接收端仍然会将该RLC PDU缓存下来，这种非顺序接收(Nonsequential receive)方法相比只能按序接收的协议会引入一个问题，而这个问题恰好可以通过对重排序窗口大小的设置来优雅地解决掉。这里我直接引用Tanenbaum的<strong>Computer Networks</strong>一书中3.4.3节的例子来阐述这个问题。</p>
 <p>假设现在RLC PDU的SN号长度为3bit，初始时刻，发送端和接收端的窗口如图所示。图中，a图是初始时刻发送端和接收端窗口的情况。发送端发送窗口为0~6，假设发送端将发送窗口内的RLC PDU全都发送出去了，接收端成功地接收到了SN0~6 RLC PDU，那么接收端就会将窗口往右挪，并将VR(MS)更新为7，此时接收窗口变为7、0~5，如b图所示。同时，接收端会给发送端发ACK，通知发送端它已经接收到了SN0 ~6 RLC PDU，发送端可以发送新的RLC PDU了。不幸的是，接收端给发送端回复的ACK全都丢失了，发送端一个都没收着，其发送窗口仍然保持不动，这种情况被称为window stalling(窗口停滞)。就这样，一段时间过后，发送端的t-PollRetransmit timer将会超时，此时发送端还没有收到0~6 RLC PDU的ACK，它会认为对方可能没有收到这7个RLC PDU，于是又重传SN0 RLC PDU，并且将该RLC PDU header里的Poll位置1，询问对方是不是没有收着它刚发出去的7个RLC PDU。当SN0 RLC PDU到达接收端时，接收端检查其是否位于接收窗口内，此时接收窗口为7、0~5，如b图所示。很不幸，SN0 RLC PDU正好位于其中，接收端认为这是一帧新的RLC PDU，于是很愉快地接收下这帧RLC PDU，然后回了一帧status report（因为它收到的RLC PDU的P位为1），ACK_SN为7，告诉发送端SN 0~6 RLC PDU都已经接收到了。发送端这会终于收到ACK了(i.e. status report)，知道SN 0~6 RLC PDU已经被对方成功接收了，于是很愉快地把发送窗口往前移动，发送窗口变为7、0~5。发送端继续发送SN7、0 ~ 5 RLC PDU给对方，接收端收到SN7、0~5RLC PDU后，发现接收buffer里面已经有SN0 RLC PDU了，就认为新接收到的SN0 RLC PDU是duplicate packet，于是就把新接收到的SN0 RLC PDU给丢弃了，然后对接收buffer里的旧的SN0 RLC PDU连同新接收到的SN7、SN1~5 RLC PDU一起解析，再向上提交给PDCP层。显然，PDCP会得到错误的packet，原因就在于RLC层把旧的SN0 RLC PDU当成了新的RLC PDU，而把真正的新的RLC PDU当成了duplicate packet给丢弃了，通信就此出错。</p>
-<p><img src="https://github.com/yangyuke2019/yangyuke2019.github.io/blob/master/PostImg/RLC_Reordering_Window.PNG" alt="image" title="图1  RLC窗口不同大小收发状态"></p>
+<div align="center"><img src="https://github.com/yangyuke2019/yangyuke2019.github.io/blob/master/PostImg/RLC_Reordering_Window.PNG &lt;font face=&quot;Consolas&quot;&gt;&quot;图1  RLC窗口不同大小收发状态&quot;&lt;/font" alt="image"></div>
+
 <p>解决这个问题的方法就是要确保接收窗口在往右移动的过程中，不会把原来的窗口给覆盖掉（即窗口移进来的部分不会与窗口移出去的部分发生重叠），上面的例子之所以会出错，就是因为接收窗口往右移动的过程中，新的窗口右边缘为SN5，刚好落入到旧的窗口里面(SN0~6)，新的窗口把旧的窗口的一部分给覆盖掉了(覆盖了SN0 ~ 5)。为了保证新的窗口不会覆盖到旧的窗口，窗口的大小最大不能超过序列号范围的一半。以图c和图d为例，序列号的范围仍然为0~7，发送窗口大小变为4，任何时刻最多只能有4帧没有被确认的RLC PDU。这种情况下，当接收端接收到SN0 ~ 3 RLC PDU之后，将会往右移动接收窗口，允许接收SN 4 ~ 7 RLC PDU，这时候，接收端可以明确地区分出发送端发过来的是重传的RLC PDU(SN0 ~ 3)还是新的RLC PDU(SN4 ~ 7)。一般来说，接收窗口和发送窗口的大小为(MAX_SEQ+1)/2，MAX_SEQ为SN的最大取值。上面的例子中，MAX_SEQ为7，因此窗口大小应该设置为4。当然了，窗口大小也可以取小一点，(MAX_SEQ+1)/2只是一个上界，极端一点的话，甚至可以把窗口大小设为1，但是没人会这么干，因为这样的话每次发送都只能发送一帧RLC PDU，然后又要等上老半天，等接收到对方的回复的确认才能发下一帧，采用这种通信方式效率会非常低。所以，这就是为什么RLC层窗口的大小要设置为序列号一半的原因。</p>
 
       
