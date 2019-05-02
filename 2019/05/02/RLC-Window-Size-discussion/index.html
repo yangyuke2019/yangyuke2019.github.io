@@ -399,7 +399,7 @@
 <p><img src="/2019/05/02/RLC-Window-Size-discussion/RLC_Reordering_Window.PNG" alt="image" title="图1  RLC窗口大小不同时收发状态"></p>
 <p>解决这个问题的方法就是要确保接收窗口在往右移动的过程中，不会把原来的窗口给覆盖掉（即窗口移进来的部分不会与窗口移出去的部分发生重叠），上面的例子之所以会出错，就是因为接收窗口往右移动的过程中，新的窗口右边缘为SN5，刚好落入到旧的窗口里面(SN0~6)，新的窗口把旧的窗口的一部分给覆盖掉了(覆盖了SN0 ~ 5)。为了保证新的窗口不会覆盖到旧的窗口，窗口的大小最大不能超过序列号范围的一半。以图c和图d为例，序列号的范围仍然为0~7，发送窗口大小变为4，任何时刻最多只能有4帧没有被确认的RLC PDU。这种情况下，当接收端接收到SN0 ~ 3 RLC PDU之后，将会往右移动接收窗口，允许接收SN 4 ~ 7 RLC PDU，这时候，接收端可以明确地区分出发送端发过来的是重传的RLC PDU(SN0 ~ 3)还是新的RLC PDU(SN4 ~ 7)。一般来说，接收窗口和发送窗口的大小为(MAX_SEQ+1)/2，MAX_SEQ为SN的最大取值。上面的例子中，MAX_SEQ为7，因此窗口大小应该设置为4。当然了，窗口大小也可以取小一点，(MAX_SEQ+1)/2只是一个上界，极端一点的话，甚至可以把窗口大小设为1，但是没人会这么干，因为这样的话每次发送都只能发送一帧RLC PDU，然后又要等上老半天，等接收到对方的回复的确认才能发下一帧，采用这种通信方式效率会非常低。所以，这就是为什么RLC层窗口的大小要设置为序列号一半的原因。</p>
 
-    <div id="aplayer-NvVZRDHq" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="26635189" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div>
+    <div id="aplayer-JAGvPIVr" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="26635189" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div>
       
     </div>
     
@@ -548,6 +548,22 @@
             </div>
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yangyuke2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1294891635@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
