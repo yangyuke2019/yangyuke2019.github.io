@@ -411,7 +411,7 @@
 <p>可见，通过PDCP层，可以保证在重建前后的无损传输，在重建前，UE尚未接收到PDCP SDU12、14，然后发生了handover，在handover后，PDCP完成重建，通过PDCP的status report，完成PDCP SDU12、14的重传，保证了数据的无损传输。</p>
 <p>后记：关于PDCP重建行为有一点疑惑，我看Radio Protocols for LTE and LTE-Advanced一书的时候，在4.6节提到了PDCP重建时对COUNT（i.e.,HFN和PDCP SN）的维护，从4.6.3节看确实AM DRB的PDCP在重建前后对COUNT会进行维护，但是我在spec(36.323)的7.1节上看到，<font color="red">Next_PDCP_TX_SN、TX_HFN、Next_PDCP_RX_SN、RX_HFN这几个状态变量在重建时会被重置为0，Last_Submitted_PDCP_RX_SN被重置为Maximum_PDCP_SN</font>，这样COUNT值岂不就无法维护了？那COUNT就得从0开始了，这样还能实现无损传输吗？</p>
 
-    <div id="aplayer-RvEOjZEr" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1338842929" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div>
+    <div id="aplayer-jYPEzzDu" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1338842929" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div>
       
     </div>
     
@@ -453,8 +453,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/07/PDCP-SDU-Discard-Analysis/" rel="prev" title="PDCP SDU Discard原因分校">
-                PDCP SDU Discard原因分校 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/07/PDCP-SDU-Discard-Analysis/" rel="prev" title="PDCP SDU Discard原因分析">
+                PDCP SDU Discard原因分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
