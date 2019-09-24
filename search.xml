@@ -35,7 +35,7 @@
       <tags>
         <tag>LTE</tag>
         <tag>RLC</tag>
-        <tag>重排序窗口</tag>
+        <tag>Reordering Window</tag>
       </tags>
   </entry>
   <entry>
@@ -43,12 +43,12 @@
     <url>%2F2019%2F04%2F17%2FProcess-and-thread%2F</url>
     <content type="text"><![CDATA[进程与线程是现代操作系统中非常重要的两个概念，其主要区别是，所有进程有自己的独立访问空间，而所有线程则共用同一地址空间。]]></content>
       <categories>
-        <category>操作系统</category>
+        <category>Operating System</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
-        <tag>进程</tag>
-        <tag>线程</tag>
+        <tag>Operating System</tag>
+        <tag>Process</tag>
+        <tag>thread</tag>
       </tags>
   </entry>
   <entry>
@@ -56,7 +56,7 @@
     <url>%2F2019%2F04%2F07%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
       <categories>
-        <category>广告</category>
+        <category>Template</category>
       </categories>
   </entry>
 </search>
