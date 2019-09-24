@@ -90,7 +90,7 @@
 <meta property="og:description" content="在LTE协议栈中，RLC层有重排序窗口（reordering window），目的是为了对接收到的乱序的数据包（RLC PDU）进行排序，然后从中解包，重组成顺序排列的RLC SDU，再向上提交给PDCP层。但是，除了RLC层以外，PDCP层也有重排序窗口，这又是为什么？RLC层已经实现重排序了 ，按理说提交给PDCP层的数据包都是顺序的了，为什么PDCP层还要有重排序窗口呢？这岂不是有点多余了？">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/05/03/PDCP-Re-establishment-Behaviour/AM_DRB_Behaviour_at_Handover.PNG">
-<meta property="og:updated_time" content="2019-05-12T14:37:57.145Z">
+<meta property="og:updated_time" content="2019-09-24T14:17:15.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PDCP重建行为概述">
 <meta name="twitter:description" content="在LTE协议栈中，RLC层有重排序窗口（reordering window），目的是为了对接收到的乱序的数据包（RLC PDU）进行排序，然后从中解包，重组成顺序排列的RLC SDU，再向上提交给PDCP层。但是，除了RLC层以外，PDCP层也有重排序窗口，这又是为什么？RLC层已经实现重排序了 ，按理说提交给PDCP层的数据包都是顺序的了，为什么PDCP层还要有重排序窗口呢？这岂不是有点多余了？">
@@ -140,9 +140,6 @@
 
 
 
-<link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
-<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
-<script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -411,7 +408,6 @@
 <p>可见，通过PDCP层，可以保证在重建前后的无损传输，在重建前，UE尚未接收到PDCP SDU12、14，然后发生了handover，在handover后，PDCP完成重建，通过PDCP的status report，完成PDCP SDU12、14的重传，保证了数据的无损传输。</p>
 <p>后记：我看Radio Protocols for LTE and LTE-Advanced一书的时候，在4.6节提到了PDCP重建时对COUNT（i.e.,HFN和PDCP SN）的维护，从4.6.3节看确实AM DRB的PDCP在重建前后对COUNT会进行维护，而在spec(36.323)的7.1节上，<font color="red">Next_PDCP_TX_SN、TX_HFN、Next_PDCP_RX_SN、RX_HFN这几个状态变量在establishment时会被初始化为0，Last_Submitted_PDCP_RX_SN被初始化为Maximum_PDCP_SN</font>，说明重建时这几个变量还是会保持为原来的值，只有establishment时才会初始化为0和Maximum_PDCP_SN。</p>
 
-    <div id="aplayer-vATjlTMH" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1338842929" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div>
       
     </div>
     
