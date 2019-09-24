@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -88,7 +88,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/05/07/PDCP-SDU-Discard-Analysis/index.html">
 <meta property="og:site_name" content="Yuke&#39;s blog">
 <meta property="og:description" content="今天遇到一个这样的case，在打volte call的时候，MO call出现PDCP SDU丢弃（discard）的现象，结果导致通话不畅。在Nan和dongliang的帮助下，逐渐分析出PDCP SDU为什么会出现被丢弃的现象。 首先分析一下PDCP SDU什么情况下会被丢弃。一般来说，PDCP SDU被丢弃都是由于PDCP discard timer超时所导致的。对控制面（control p">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-05-07T15:35:58.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PDCP SDU Discard原因分析">
@@ -108,7 +108,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -143,7 +143,7 @@
 <script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -191,7 +191,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            首页
+            Home
           </a>
         </li>
       
@@ -201,7 +201,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            关于
+            About
           </a>
         </li>
       
@@ -211,7 +211,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -221,7 +221,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            分类
+            Categories
           </a>
         </li>
       
@@ -231,7 +231,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -244,7 +244,7 @@
             
               <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
-            搜索
+            Search
           </a>
         </li>
       
@@ -263,7 +263,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -327,9 +327,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-07T23:29:00+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-07T23:29:00+08:00">
                 2019-05-07
               </time>
             
@@ -348,7 +348,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -394,7 +394,7 @@
 <p>一旦PDCP层发送buffer有PDCP SDU，MAC就会发SR（Scheduling Request）给eNB，请求eNB给予UL grant。一般来说，eNB收到UE发送过来的SR之后，会根据空口资源的调配情况，给予UE一个较小的UL grant，这个UL grant虽然很小，但是足够UE发BSR了。UE在收到eNB回的UL grant之后，就会给eNB发BSR（buffer status report），告诉eNB它的PDCP buffer里面有多少东西要发送。这时候eNB收到UE的BSR后，再根据空口资源调配情况，给UE发UL grant，这回的UL grant就不再是用来传BSR的了，而是发真正的数据了。UE这回收到eNB回的UL grant，就会开始发送数据给eNB。这是正常情况下UE和eNB的行为。</p>
 <p>但是，今天遇到的问题是，一个DRB的PDCP buffer收到上层发过来的数据后，MAC尝试发SR出去，但是却发不出去，结果超时了。在MAC发SR到SR超时的这段时间里，PDCP发送buffer里的PDCP SDU因为长时间没有发送出去，导致discard timer超时，然后就被discard掉。在SR超时后，MAC又不停地发RACH，结果还是一直失败，就这样，UE发不出去SR，eNB就不会回UL grant，UE也就不可能再发BSR，eNB也不会再回UL grant……</p>
 <p>那么，为什么MAC会发不出去SR呢？这个问题还是得到ML1去找原因，因为MAC发SR，从逻辑上讲是UE的MAC给eNB的MAC发SR，但实际上UE的MAC是把SR发给了UE的ML1，ML1再将其发送出去的，但是因为ML1出于某些未知的原因，没有将SR发出去，所以eNB就不会收到SR。至于ML1是因为什么没有将SR发出去呢？这里就不清楚了，后续还得继续跟进这个问题……<br>
-    <div id="aplayer-HVdcABsp" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1489566" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div></p>
+    <div id="aplayer-ETPMxqJH" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1489566" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div></p>
 
       
     </div>
@@ -506,7 +506,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">5</span>
-                  <span class="site-state-item-name">日志</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -517,7 +517,7 @@
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">分类</span>
+                  <span class="site-state-item-name">categories</span>
                 </a>
               </div>
             
@@ -528,7 +528,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">8</span>
-                  <span class="site-state-item-name">标签</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -597,7 +597,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -605,7 +605,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 

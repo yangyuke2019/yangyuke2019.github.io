@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -88,7 +88,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/05/03/PDCP-Re-establishment-Behaviour/index.html">
 <meta property="og:site_name" content="Yuke&#39;s blog">
 <meta property="og:description" content="在LTE协议栈中，RLC层有重排序窗口（reordering window），目的是为了对接收到的乱序的数据包（RLC PDU）进行排序，然后从中解包，重组成顺序排列的RLC SDU，再向上提交给PDCP层。但是，除了RLC层以外，PDCP层也有重排序窗口，这又是为什么？RLC层已经实现重排序了 ，按理说提交给PDCP层的数据包都是顺序的了，为什么PDCP层还要有重排序窗口呢？这岂不是有点多余了？">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/05/03/PDCP-Re-establishment-Behaviour/AM_DRB_Behaviour_at_Handover.PNG">
 <meta property="og:updated_time" content="2019-05-12T14:37:57.145Z">
 <meta name="twitter:card" content="summary">
@@ -110,7 +110,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -145,7 +145,7 @@
 <script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -193,7 +193,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            首页
+            Home
           </a>
         </li>
       
@@ -203,7 +203,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            关于
+            About
           </a>
         </li>
       
@@ -213,7 +213,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -223,7 +223,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            分类
+            Categories
           </a>
         </li>
       
@@ -233,7 +233,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -246,7 +246,7 @@
             
               <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
-            搜索
+            Search
           </a>
         </li>
       
@@ -265,7 +265,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -329,9 +329,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T15:12:23+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-03T15:12:23+08:00">
                 2019-05-03
               </time>
             
@@ -350,7 +350,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -411,7 +411,7 @@
 <p>可见，通过PDCP层，可以保证在重建前后的无损传输，在重建前，UE尚未接收到PDCP SDU12、14，然后发生了handover，在handover后，PDCP完成重建，通过PDCP的status report，完成PDCP SDU12、14的重传，保证了数据的无损传输。</p>
 <p>后记：我看Radio Protocols for LTE and LTE-Advanced一书的时候，在4.6节提到了PDCP重建时对COUNT（i.e.,HFN和PDCP SN）的维护，从4.6.3节看确实AM DRB的PDCP在重建前后对COUNT会进行维护，而在spec(36.323)的7.1节上，<font color="red">Next_PDCP_TX_SN、TX_HFN、Next_PDCP_RX_SN、RX_HFN这几个状态变量在establishment时会被初始化为0，Last_Submitted_PDCP_RX_SN被初始化为Maximum_PDCP_SN</font>，说明重建时这几个变量还是会保持为原来的值，只有establishment时才会初始化为0和Maximum_PDCP_SN。</p>
 
-    <div id="aplayer-DvaJaIvm" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1338842929" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div>
+    <div id="aplayer-vATjlTMH" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="1338842929" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081"></div>
       
     </div>
     
@@ -524,7 +524,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">5</span>
-                  <span class="site-state-item-name">日志</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -535,7 +535,7 @@
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">分类</span>
+                  <span class="site-state-item-name">categories</span>
                 </a>
               </div>
             
@@ -546,7 +546,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">8</span>
-                  <span class="site-state-item-name">标签</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -615,7 +615,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -623,7 +623,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
