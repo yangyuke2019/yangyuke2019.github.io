@@ -250,7 +250,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在LTE协议栈中，RLC层有重排序窗口（reordering window），目的是为了对接收到的乱序的数据包（RLC PDU）进行排序，然后从中解包，重组成顺序排列的RLC SDU，再向上提交给PDCP层。但是，除了RLC层以外，PDCP层也有重排序窗口，这又是为什么？RLC层已经实现重排序了 ，按理说提交给PDCP层的数据包都是顺序的了，为什么PDCP层还要有重排序窗口呢？这岂不是有点多余了？</p>
+        <p>在LTE协议栈中，RLC层有重排序窗口（reordering window），目的是为了对接收到的乱序的数据包（RLC PDU）进行排序，然后从中解包，重组成顺序排列的RLC SDU，再向上提交给PDCP层。但是，除了RLC层以外，PDCP层也有重排序窗口，这又是为什么？RLC层已经实现重排序了 ，按理说提交给PDCP层的数据包都是顺序的了，为什么PDCP层还要有重排序窗口呢？这岂不是有点多余了？</p><a id="more"></a>
 <p>原因就在于重建（re-establishment），在重建时，RLC层会失去它的重排序和重传功能，因此需要由PDCP层来代为实现。在正常情况下，使用AM模块的RLC实体可以通过重传机制保证数据的无损传输（注意，TM和UM模式下是没有重传功能的），但是在重建时，AMD RLC实体会做下面这几件事：</p>
 <ul>
 <li>RLC实体的接收端对接收buffer里所有SN小于VR(MR)的AMD PDU以及AMD PDU分段进行处理，从中重组出RLC SDU，将之前尚未提交过给PDCP的RLC SDU提交给PDCP，提交时按RLC SN由小到大的顺序提交</li>
@@ -367,6 +367,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yang-yuke" title="GitHub &rarr; https://github.com/yang-yuke" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yangyuke16@mails.ucas.ac.cn" title="E-Mail &rarr; mailto:yangyuke16@mails.ucas.ac.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
